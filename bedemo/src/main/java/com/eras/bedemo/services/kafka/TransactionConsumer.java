@@ -34,17 +34,16 @@ public class TransactionConsumer {
 		try {
 			repository.save(trans);
 			LOG.info("saved transaction to db {}", transaction);
+			transactionResult.setStatus(Status.SUCCESS);
+			transactionResult.setMsg("saved transaction to db");
+
+			resultProducer.produce(transactionResult);
 		} catch (Exception e) {
 			LOG.error("saving transaction failed {}", transaction, e);
 			transactionResult.setStatus(Status.FAIL);
 			transactionResult.setMsg("saving transaction failed: " + e.getMessage());
 			resultProducer.produce(transactionResult);
 		}
-
-		transactionResult.setStatus(Status.SUCCESS);
-		transactionResult.setMsg("saved transaction to db");
-
-		resultProducer.produce(transactionResult);
 	}
 
 }
