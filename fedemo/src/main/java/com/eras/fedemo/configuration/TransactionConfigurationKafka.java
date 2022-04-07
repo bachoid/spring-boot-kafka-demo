@@ -23,10 +23,10 @@ public class TransactionConfigurationKafka {
 	}
 
 	@Bean
-	public ConcurrentMessageListenerContainer<String, Transaction> repliesContainer(
-			ConcurrentKafkaListenerContainerFactory<String, Transaction> containerFactory) {
+	public ConcurrentMessageListenerContainer<String, TransactionResult> repliesContainer(
+			ConcurrentKafkaListenerContainerFactory<String, TransactionResult> containerFactory) {
 
-		ConcurrentMessageListenerContainer<String, Transaction> repliesContainer = containerFactory
+		ConcurrentMessageListenerContainer<String, TransactionResult> repliesContainer = containerFactory
 				.createContainer("transactionReplies");
 		repliesContainer.getContainerProperties().setGroupId("repliesGroup");
 		repliesContainer.setAutoStartup(false);
